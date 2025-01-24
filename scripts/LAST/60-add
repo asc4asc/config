@@ -1,0 +1,44 @@
+#! /bin/bash
+
+# copyright Andreas Schockenhoff 2001-2025, asc@ekf.de
+
+error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
+
+if ifclass DEBUG ; then
+    # echo '  ' > $target/home/${username}/
+    echo 'sudo make.eth1' > $target/home/${username}/100-make.eth1
+    echo 'sudo chmod a+x /usr/local/sbin/rc.local && sudo /usr/local/sbin/rc.local' > $target/home/${username}/200-rc.local.fai
+
+    echo 'echo "sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> $target/etc/rc.local' > $target/usr/local/sbin/make.nat
+    echo 'echo "net.ipv4.ip_forward = 1"  >> /etc/sysctl.conf' >> $target/usr/local/sbin/make.nat
+    chmod a+x $target/usr/local/sbin/make.nat 
+    echo 'sudo make.nat' >> $target/home/${username}/500-masq.me 
+
+    # echo 'sudo reboot' > $target/home/${username}/150-reboot 
+    echo 'sudo reboot' > $target/home/${username}/990-reboot 
+
+#    cat <<-EOF > $target/usr/local/sbin/make1.eth1 
+#        echo "auto eth1" > /etc/network/interfaces.d/eth1 
+#        echo "iface eth1 inet static" >> /etc/network/interfaces.d/eth1' 
+#        echo "address 192.168.66.252/24" >> /etc/network/interfaces.d/eth1 
+#    EOF
+
+    echo 'echo "auto eth1" > /etc/network/interfaces.d/eth1' > $target/usr/local/sbin/make.eth1
+    echo 'echo "iface eth1 inet static" >> /etc/network/interfaces.d/eth1' >> $target/usr/local/sbin/make.eth1
+    echo 'echo "address 192.168.66.252/24" >> /etc/network/interfaces.d/eth1' >> $target/usr/local/sbin/make.eth1
+    chmod a+x $target/usr/local/sbin/make.eth1 
+    
+    echo 'fai-chboot -f verbose,sshd,createvt -I -u nfs://192.168.66.252/srv/fai/asc-fai-config faiserver2' > $target/home/${username}/faiserver2-chboot
+    echo 'sudo rm -rf /srv/fai/asc-fai-config ; cd /srv/fai && sudo git clone --branch server https://github.com/asc4asc/asc-fai-config.git' > $target/home/${username}/rm-git.clone.asc 
+    echo 'systemctl restart isc-dhcp-server.service' > $target/home/${username}/systemctl_restart_isc-dhcp-server.service
+    echo 'ansible-playbook -c=local --inventory=localhost, debian-lan-ansible/minimal.yml' > $target/home/${username}/ansible.demo 
+    echo 'git clone https://salsa.debian.org/andi/debian-lan-ansible' > $target/home/${username}/get.ansible
+    echo 'sudo dd if=/dev/zero of=/dev/sda count=1000 && sudo sync && sudo reboot' > $target/home/${username}/clean.sda
+    $ROOTCMD chmod a+x /usr/local/sbin/make-auto-login-console
+    $ROOTCMD make-auto-login-console -e ${username}
+    echo ${username} "ALL=(ALL) NOPASSWD:ALL" >/tmp/tmp1
+    cp /tmp/tmp1 ${target}/etc/sudoers.d/sudo4${username}  
+    mkdir -p ${target}/home/${username}/.ssh
+    cat /home/id_rsa.pub >> $target/home/${username}/.ssh/authorized_keys
+fi
+exit $error

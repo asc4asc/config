@@ -1,0 +1,24 @@
+#! /bin/bash
+
+# assign classes to hosts based on their hostname
+
+# do not use this if a menu will be presented
+[ "$flag_menu" ] && exit 0
+
+# use a list of classes for our demo machine
+case $HOSTNAME in
+    faiserver)
+        echo "FAIBASE DEBIAN DEMO CLOUD DEBUG FAISERVER" ;;
+    faiserver2)
+        echo "FAIBASE DEBIAN DEMO CLOUD DEBUG FAISERVER2" ;;
+    demohost|client*)
+        echo "FAIBASE DEBIAN DEMO CLOUD DEBUG" ;;
+    installbox)
+        echo "FAIBASE DEBIAN DEMO DEBUG" ;;
+    xfcehost)
+        echo "FAIBASE DEBIAN DEMO XORG XFCE LVM";;
+    gnomehost)
+        echo "FAIBASE DEBIAN DEMO XORG GNOME";;
+    *)
+        echo "FAIBASE DEBIAN";;
+esac

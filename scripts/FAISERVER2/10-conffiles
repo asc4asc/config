@@ -1,0 +1,56 @@
+#! /bin/bash
+
+fcopy -BvrS /etc/fai
+fcopy -BvS /etc/dhcp/dhcpd.conf
+
+if [ $FAI_ACTION = "install" -o $FAI_ACTION = "dirinstall" ] ; then
+
+    # use the same sources.list for the server itself and the clients
+    cp -a $target/etc/fai/apt $target/etc/
+
+    if ifclass DHCPC; then
+	rm -f $target/etc/resolv.conf
+    else
+	echo 127.0.0.1 > $target/etc/resolv.conf
+    fi
+
+    # faiserver uses its own apt cache
+    ainsl -av /etc/apt/apt.conf.d/02proxy 'Acquire::http::Proxy "http://127.0.0.1:3142";'
+
+    ainsl /etc/hosts "192.168.66.252 faiserver2"  # that's me
+    ainsl /etc/hosts "192.168.66.100 demohost"
+    ainsl /etc/hosts "192.168.66.101 xfcehost"
+    # add entries for 10 hosts called client 01 .. 10
+    perl -e 'for (1..10) {printf "192.168.66.%s client%02s\n",101+$_,$_;}' >> $target/etc/hosts
+
+    fai-sed '/# ReuseConnections: 1/d' /etc/apt-cacher-ng/acng.conf
+    ainsl -v /etc/apt-cacher-ng/acng.conf "ReuseConnections: 1"
+    ainsl -v /etc/apt-cacher-ng/acng.conf "PipelineDepth: 80"
+    ainsl -v /etc/apt-cacher-ng/acng.conf "DlMaxRetries: 6"
+
+    # copy base file for faster building of nfsroot
+    if [ -f /var/tmp/base.tar.xz ]; then
+	cp -p /var/tmp/base.tar.xz $target/var/tmp
+    fi
+
+    if [ -d /media/mirror/pool ]; then
+	mkdir $target/var/cache/apt-cacher-ng/_import
+	cp -p /media/mirror/pool/*/*/*/*.deb $target/var/cache/apt-cacher-ng/_import
+	$ROOTCMD chown -R apt-cacher-ng:apt-cacher-ng  /var/cache/apt-cacher-ng/_import
+    fi
+
+    # copy basefiles from CD to config space
+    if [ -d $FAI/basefiles ]; then
+	mkdir -p $target/srv/fai/config/basefiles
+	cp -vp $FAI/basefiles/*.tar.* $target/srv/fai/config/basefiles 2>/dev/null || true
+    fi
+    $ROOTCMD echo "net.ipv4.ip_forward = 1"  >> /etc/sysctl.conf
+    # $ROOTCMD iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+    # $ROOTCMD mkdir -d /etc/iptables
+    # $ROOTCMD iptables-save > /etc/iptables/rules.v4
+    
+    # Fix problem with export wrong IP?
+    echo "/srv/fai *(async,ro,no_subtree_check)" > $target/etc/exports
+    # /srv/fai/nfsroot *(async,ro,no_subtree_check,no_root_squash)
+
+fi

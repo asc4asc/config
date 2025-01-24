@@ -1,0 +1,18 @@
+# the kernel is now defined in DEBIAN
+
+PACKAGES install
+ubuntu-minimal
+ubuntu-server
+
+PACKAGES install XORG
+ubuntu-server-
+ubuntu-standard
+ubuntu-desktop
+
+PACKAGES install GERMAN
+language-pack-gnome-de
+
+PACKAGES install CHROOT
+# a chroot does not need a kernel.
+# See class/DEBIAN.var for the exact package name
+${kernelname}-
