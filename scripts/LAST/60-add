@@ -28,7 +28,8 @@ if ifclass DEBUG ; then
     echo 'echo "address 192.168.66.252/24" >> /etc/network/interfaces.d/eth1' >> $target/usr/local/sbin/make.eth1
     chmod a+x $target/usr/local/sbin/make.eth1 
     
-    echo 'fai-chboot -f verbose,sshd,createvt -I -u nfs://192.168.66.252/srv/fai/asc-fai-config faiserver2' > $target/home/${username}/faiserver2-chboot
+    # echo 'fai-chboot -f verbose,sshd,createvt -I -u nfs://192.168.66.252/srv/fai/config faiserver1' > $target/home/${username}/faiserver1-chboot
+    # echo 'fai-chboot -f verbose,sshd,createvt -I -u nfs://192.168.11.251/srv/fai/config faiserver2' > $target/home/${username}/faiserver2-chboot
     echo 'sudo rm -rf /srv/fai/asc-fai-config ; cd /srv/fai && sudo git clone --branch server https://github.com/asc4asc/asc-fai-config.git' > $target/home/${username}/rm-git.clone.asc 
     echo 'systemctl restart isc-dhcp-server.service' > $target/home/${username}/systemctl_restart_isc-dhcp-server.service
     echo 'ansible-playbook -c=local --inventory=localhost, debian-lan-ansible/minimal.yml' > $target/home/${username}/ansible.demo 

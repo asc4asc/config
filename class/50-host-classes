@@ -9,6 +9,8 @@
 case $HOSTNAME in
     faiserver)
         echo "FAIBASE DEBIAN DEMO CLOUD DEBUG FAISERVER" ;;
+    faiserver1)
+        echo "FAIBASE DEBIAN DEMO CLOUD DEBUG FAISERVER1" ;;
     faiserver2)
         echo "FAIBASE DEBIAN DEMO CLOUD DEBUG FAISERVER2" ;;
     demohost|client*)
