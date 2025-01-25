@@ -1,0 +1,23 @@
+#! /bin/bash
+
+# copyright Andreas Schockenhoff 2001-2025, asc@ekf.de
+
+error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
+
+echo 'sudo make.eth1' > $target/home/${username}/100-make.eth1
+
+#    cat <<-EOF > $target/usr/local/sbin/make1.eth1 
+#        echo "auto eth1" > /etc/network/interfaces.d/eth1 
+#        echo "iface eth1 inet static" >> /etc/network/interfaces.d/eth1' 
+#        echo "address 192.168.66.252/24" >> /etc/network/interfaces.d/eth1 
+#    EOF
+
+echo 'echo "auto eth1" > /etc/network/interfaces.d/eth1' > $target/usr/local/sbin/make.eth1
+echo 'echo "iface eth1 inet static" >> /etc/network/interfaces.d/eth1' >> $target/usr/local/sbin/make.eth1
+echo 'echo "address 192.168.11.251/24" >> /etc/network/interfaces.d/eth1' >> $target/usr/local/sbin/make.eth1
+chmod a+x $target/usr/local/sbin/make.eth1 
+    
+# echo 'fai-chboot -f verbose,sshd,createvt -I -u nfs://192.168.66.252/srv/fai/config faiserver1' > $target/home/${username}/faiserver1-chboot
+# echo 'fai-chboot -f verbose,sshd,createvt -I -u nfs://192.168.11.251/srv/fai/config faiserver2' > $target/home/${username}/faiserver2-chboot
+
+exit $error

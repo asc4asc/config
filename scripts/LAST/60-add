@@ -6,7 +6,6 @@ error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
 
 if ifclass DEBUG ; then
     # echo '  ' > $target/home/${username}/
-    echo 'sudo make.eth1' > $target/home/${username}/100-make.eth1
     echo 'sudo chmod a+x /usr/local/sbin/rc.local && sudo /usr/local/sbin/rc.local' > $target/home/${username}/200-rc.local.fai
 
     echo 'echo "sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> $target/etc/rc.local' > $target/usr/local/sbin/make.nat
@@ -17,19 +16,6 @@ if ifclass DEBUG ; then
     # echo 'sudo reboot' > $target/home/${username}/150-reboot 
     echo 'sudo reboot' > $target/home/${username}/990-reboot 
 
-#    cat <<-EOF > $target/usr/local/sbin/make1.eth1 
-#        echo "auto eth1" > /etc/network/interfaces.d/eth1 
-#        echo "iface eth1 inet static" >> /etc/network/interfaces.d/eth1' 
-#        echo "address 192.168.66.252/24" >> /etc/network/interfaces.d/eth1 
-#    EOF
-
-    echo 'echo "auto eth1" > /etc/network/interfaces.d/eth1' > $target/usr/local/sbin/make.eth1
-    echo 'echo "iface eth1 inet static" >> /etc/network/interfaces.d/eth1' >> $target/usr/local/sbin/make.eth1
-    echo 'echo "address 192.168.66.252/24" >> /etc/network/interfaces.d/eth1' >> $target/usr/local/sbin/make.eth1
-    chmod a+x $target/usr/local/sbin/make.eth1 
-    
-    # echo 'fai-chboot -f verbose,sshd,createvt -I -u nfs://192.168.66.252/srv/fai/config faiserver1' > $target/home/${username}/faiserver1-chboot
-    # echo 'fai-chboot -f verbose,sshd,createvt -I -u nfs://192.168.11.251/srv/fai/config faiserver2' > $target/home/${username}/faiserver2-chboot
     echo 'sudo rm -rf /srv/fai/asc-fai-config ; cd /srv/fai && sudo git clone --branch server https://github.com/asc4asc/asc-fai-config.git' > $target/home/${username}/rm-git.clone.asc 
     echo 'systemctl restart isc-dhcp-server.service' > $target/home/${username}/systemctl_restart_isc-dhcp-server.service
     echo 'ansible-playbook -c=local --inventory=localhost, debian-lan-ansible/minimal.yml' > $target/home/${username}/ansible.demo 
