@@ -32,6 +32,6 @@ if ifclass DEBUG ; then
     echo ${username} "ALL=(ALL) NOPASSWD:ALL" >/tmp/tmp1
     cp /tmp/tmp1 ${target}/etc/sudoers.d/sudo4${username}  
     mkdir -p ${target}/home/${username}/.ssh
-    cat /home/id_rsa.pub >> $target/home/${username}/.ssh/authorized_keys
+    # cat /home/id_rsa.pub >> $target/home/${username}/.ssh/authorized_keys # LATER!
 fi
 exit $error
