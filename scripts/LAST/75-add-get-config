@@ -1,0 +1,14 @@
+#! /bin/bash
+
+# copyright Andreas Schockenhoff 2001-2025, asc@ekf.de
+
+error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
+
+cat <<'EOF' > $target/home/${username}/600-get-config-space
+cd /srv/fai && mv config config.$$ && sudo git clone --branch main https://github.com/asc4asc/config.git
+chmod -R a+x /srv/fai/config/scripts/*
+chmod -R a+x /srv/fai/config/class/*
+chmod -R a+x /srv/fai/config/hooks/*
+EOF
+
+exit $error
