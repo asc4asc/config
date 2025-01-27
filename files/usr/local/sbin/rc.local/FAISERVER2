@@ -89,7 +89,7 @@ EOF
 
 # create default pxelinux boot configuration
 # fai-chboot -o default
-fai-chboot -Iv -f verbose,sshd,createvt,menu -u nfs://faiserver2/srv/fai/config -k hostname=faiserver1 default
+fai-chboot -Iv -f verbose,sshd,createvt,menu -u nfs://faiserver2/srv/fai/config default
 
 # create a template for booting the installation
 fai-chboot -Iv -f verbose,sshd,createvt,menu -u nfs://faiserver2/srv/fai/config bookworm.tmpl
