@@ -11,4 +11,6 @@ sudo chmod -R a+x /srv/fai/config/class/*
 sudo chmod -R a+x /srv/fai/config/hooks/*
 EOF
 
+chmod a+x $target/home/${username}/600-get-config-space
+
 exit $error
