@@ -27,6 +27,9 @@ subnet 192.168.66.0 netmask 255.255.255.0 {
    }
 }
 
+host faiserver1 { hardware ethernet bc:24:11:00:00:01 } ;fixed-address faiserver1; }
+host faiserver2 { hardware ethernet bc:24:11:00:00:02 } ;fixed-address faiserver2; }
+
 # generate a lot of entries with:
 # perl -e 'for (1..10) {printf "host client%02s {hardware ethernet XXX:$_;fixed-address client%02s;}\n",$_,$_;}'
 # then replace XXX with the hardware addresses of your clients
