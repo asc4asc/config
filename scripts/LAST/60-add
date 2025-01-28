@@ -6,7 +6,7 @@ error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
 
 if ifclass DEBUG ; then
     # echo '  ' > $target/home/${username}/
-    echo '. 100-make.eth1 && . 200-rc.local.fai && . 500-masq.me && . 600-get-config-space && . 990-reboot ' > $target/home/${username}/do-all
+    echo '. 100-make.eth1 && . 200-rc.local.fai && . 500-masq.me && . 600-get-config-space && sudo poweroff' > $target/home/${username}/do-all
     chmod a+x $target/home/${username}/do-all
     echo 'sudo chmod a+x /usr/local/sbin/rc.local && sudo /usr/local/sbin/rc.local' > $target/home/${username}/200-rc.local.fai
     chmod a+x $target/home/${username}/200-rc.local.fai
