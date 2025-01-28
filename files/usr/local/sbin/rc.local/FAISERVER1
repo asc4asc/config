@@ -91,6 +91,9 @@ EOF
 # fai-chboot -o default
 fai-chboot -Iv -f verbose,sshd,createvt,menu -u nfs://faiserver1/srv/fai/config default
 
+# the new fai server special no menu!
+fai-chboot -Iv -f verbose,sshd,createvt -u nfs://faiserver1/srv/fai/config -k hostname=faiserver2 faiserver2
+
 # create a template for booting the installation
 fai-chboot -Iv -f verbose,sshd,createvt,menu -u nfs://faiserver1/srv/fai/config bookworm.tmpl
 
