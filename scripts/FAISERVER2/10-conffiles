@@ -18,6 +18,7 @@ if [ $FAI_ACTION = "install" -o $FAI_ACTION = "dirinstall" ] ; then
     ainsl -av /etc/apt/apt.conf.d/02proxy 'Acquire::http::Proxy "http://127.0.0.1:3142";'
 
     ainsl /etc/hosts "192.168.66.252 faiserver2"  # that's me
+    ainsl /etc/hosts "192.168.66.251 faiserver1" 
     ainsl /etc/hosts "192.168.66.100 demohost"
     ainsl /etc/hosts "192.168.66.101 xfcehost"
     # add entries for 10 hosts called client 01 .. 10
