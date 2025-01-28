@@ -18,8 +18,12 @@ if ifclass DEBUG ; then
     chmod a+x $target/home/${username}/500-masq.me
 
     # echo 'sudo reboot' > $target/home/${username}/150-reboot 
-    echo 'sudo reboot' > $target/home/${username}/990-reboot 
-    chmod a+x $target/home/${username}/990-reboot
+    echo 'sudo poweroff' > $target/home/${username}/990-poweroff
+    chmod a+x $target/home/${username}/990-poweroff
+    echo 'sudo reboot' > $target/home/${username}/reboot
+    chmod a+x $target/home/${username}/reboot
+    echo 'sudo poweroff' > $target/home/${username}/poweroff
+    chmod a+x $target/home/${username}/poweroff
 
     echo 'sudo rm -rf /srv/fai/asc-fai-config ; cd /srv/fai && sudo git clone --branch server https://github.com/asc4asc/asc-fai-config.git' > $target/home/${username}/rm-git.clone.asc 
     echo 'systemctl restart isc-dhcp-server.service' > $target/home/${username}/systemctl_restart_isc-dhcp-server.service
@@ -27,6 +31,8 @@ if ifclass DEBUG ; then
     chmod a+x $target/home/${username}/ansible.demo
     echo 'git clone https://salsa.debian.org/andi/debian-lan-ansible' > $target/home/${username}/get.ansible
     chmod a+x $target/home/${username}/get.ansible
+    echo 'git clone https://github.com/asc4asc/misc.git' > $target/home/${username}/get.misc4asc
+    chmod a+x $target/home/${username}/get.misc4asc
     echo 'sudo dd if=/dev/zero of=/dev/sda count=1000 && sudo sync && sudo reboot' > $target/home/${username}/clean.sda
     chmod a+x $target/home/${username}/clean.sda
     $ROOTCMD chmod a+x /usr/local/sbin/make-auto-login-console
