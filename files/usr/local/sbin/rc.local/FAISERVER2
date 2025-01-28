@@ -91,7 +91,7 @@ EOF
 # fai-chboot -o default
 fai-chboot -Iv -f verbose,sshd,createvt,menu -u nfs://faiserver2/srv/fai/config default
 
-# special for installin new faiserver without menu
+# special for install new faiserver without menu
 fai-chboot -Iv -f verbose,sshd,createvt -u nfs://faiserver2/srv/fai/config -k hostname=faiserver1 faiserver1
 
 # create a template for booting the installation
