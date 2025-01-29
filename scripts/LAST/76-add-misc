@@ -1,0 +1,13 @@
+#! /bin/bash
+
+# copyright Andreas Schockenhoff 2001-2025, asc@ekf.de
+
+error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
+
+cat <<'EOF' > $target/home/${username}/git-get-misc
+cd /srv/fai && sudo mv config config.$$ && sudo git clone --branch main https://github.com/asc4asc/misc.git
+EOF
+
+chmod a+x $target/home/${username}/git-get-misc
+
+exit $error
