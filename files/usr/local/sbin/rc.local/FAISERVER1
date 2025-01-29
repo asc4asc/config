@@ -112,4 +112,7 @@ echo '#! /bin/bash' > /etc/rc.local
 # echo 'fai-monitor > /var/log/fai/fai-monitor.log &' >> /etc/rc.local
 chmod a+rx /etc/rc.local
 
+echo "please check here it looks we have sometimes a bug!"
+cat /srv/fai/nfsroot/etc/hosts 
+
 exit 0
