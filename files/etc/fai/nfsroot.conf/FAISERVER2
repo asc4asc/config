@@ -12,4 +12,4 @@ FAI_DEBOOTSTRAP_OPTS="--exclude=info"
 # Configuration space
 FAI_CONFIGDIR=/srv/fai/config
 
-NFSROOT_ETC_HOSTS="192.168.66.252 faiserver2"
+NFSROOT_ETC_HOSTS="192.168.11.252 faiserver2"
