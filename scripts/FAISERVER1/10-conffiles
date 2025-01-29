@@ -51,7 +51,7 @@ if [ $FAI_ACTION = "install" -o $FAI_ACTION = "dirinstall" ] ; then
     # $ROOTCMD iptables-save > /etc/iptables/rules.v4
     
     # Fix problem with export wrong IP?
-    echo "/srv/fai *(async,ro,no_subtree_check)" > $target/etc/exports
-    # /srv/fai/nfsroot *(async,ro,no_subtree_check,no_root_squash)
+    echo '/srv/fai/config *(async,ro,no_subtree_check)' > $target/etc/exports
+    echo '/srv/fai/nfsroot *(async,ro,no_subtree_check,no_root_squash)' >> $target/etc/exports
 
 fi
