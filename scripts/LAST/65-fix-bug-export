@@ -1,0 +1,15 @@
+#! /bin/bash
+
+# copyright Andreas Schockenhoff 2001-2025, asc@ekf.de
+
+error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
+
+if ifclass DEBUG ; then
+    
+    # Fix problem with export wrong IP?
+    echo '/srv/fai/config *(async,ro,no_subtree_check)' > $target/etc/exports
+    echo '/srv/fai/nfsroot *(async,ro,no_subtree_check,no_root_squash)' >> $target/etc/exports
+    
+    # cat /home/id_rsa.pub >> $target/home/${username}/.ssh/authorized_keys # LATER!
+fi
+exit $error

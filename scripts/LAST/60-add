@@ -31,16 +31,7 @@ if ifclass DEBUG ; then
     chmod a+x $target/home/${username}/get.train-ansi
     echo 'sudo dd if=/dev/zero of=/dev/sda count=1000 && sudo sync && sudo reboot' > $target/home/${username}/clean.sda
     chmod a+x $target/home/${username}/clean.sda
-    $ROOTCMD chmod a+x /usr/local/sbin/make-auto-login-console
-    $ROOTCMD make-auto-login-console -e ${username}
-    echo ${username} "ALL=(ALL) NOPASSWD:ALL" >/tmp/tmp1
-    cp /tmp/tmp1 ${target}/etc/sudoers.d/sudo4${username}  
+    
     mkdir -p ${target}/home/${username}/.ssh
-    
-    # Fix problem with export wrong IP?
-    echo '/srv/fai/config *(async,ro,no_subtree_check)' > $target/etc/exports
-    echo '/srv/fai/nfsroot *(async,ro,no_subtree_check,no_root_squash)' >> $target/etc/exports
-    
-    # cat /home/id_rsa.pub >> $target/home/${username}/.ssh/authorized_keys # LATER!
 fi
 exit $error

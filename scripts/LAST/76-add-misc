@@ -5,6 +5,7 @@
 error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
 if ifclass DEBUG ; then
 cat <<'EOF' > $target/home/${username}/git-get-misc
+#!/bin/bash
 sudo git clone --branch main https://github.com/asc4asc/misc.git
 EOF
 

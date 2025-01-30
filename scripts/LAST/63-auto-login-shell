@@ -1,0 +1,13 @@
+#! /bin/bash
+
+# copyright Andreas Schockenhoff 2001-2025, asc@ekf.de
+
+error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
+
+if ifclass DEBUG ; then
+    $ROOTCMD chmod a+x /usr/local/sbin/make-auto-login-console
+    $ROOTCMD make-auto-login-console -e ${username}
+    echo ${username} "ALL=(ALL) NOPASSWD:ALL" >/tmp/tmp1
+    cp /tmp/tmp1 ${target}/etc/sudoers.d/sudo4${username}  
+fi
+exit $error
