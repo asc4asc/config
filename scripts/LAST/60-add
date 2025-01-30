@@ -27,10 +27,6 @@ if ifclass DEBUG ; then
     echo 'sudo poweroff' > $target/home/${username}/poweroff
     chmod a+x $target/home/${username}/poweroff
 
-    echo 'ansible-playbook -c=local --inventory=localhost, debian-lan-ansible/minimal.yml' > $target/home/${username}/ansible.demo 
-    chmod a+x $target/home/${username}/ansible.demo
-    echo 'git clone https://salsa.debian.org/andi/debian-lan-ansible' > $target/home/${username}/get.ansible
-    chmod a+x $target/home/${username}/get.ansible
     echo 'git clone https://github.com/asc4asc/train-ansi' > $target/home/${username}/get.train-ansi
     chmod a+x $target/home/${username}/get.train-ansi
     echo 'sudo dd if=/dev/zero of=/dev/sda count=1000 && sudo sync && sudo reboot' > $target/home/${username}/clean.sda
