@@ -5,29 +5,28 @@
 error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
 
 if ifclass DEBUG ; then
+    mkdir $target/home/${username}/faiserv
     # echo '  ' > $target/home/${username}/
-    echo '. 100-make.eth1 && . 200-rc.local.fai && . 500-masq.me && . 600-get-config-space && echo "please check here it looks we have sometimes a bug!" && 
-cat /srv/fai/nfsroot/etc/hosts ' > $target/home/${username}/do-all
+    echo '. 200-rc.local.fai && . 500-masq.me && . 600-get-config-space'> $target/home/${username}/faiserv/do-all
     chmod a+x $target/home/${username}/do-all
-    echo 'sudo chmod a+x /usr/local/sbin/rc.local && sudo /usr/local/sbin/rc.local' > $target/home/${username}/200-rc.local.fai
+
+    echo 'sudo chmod a+x /usr/local/sbin/rc.local && sudo /usr/local/sbin/rc.local' > $target/home/${username}/faiserv/200-rc.local.fai
     chmod a+x $target/home/${username}/200-rc.local.fai
 
     echo 'echo "sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> $target/etc/rc.local' > $target/usr/local/sbin/make.nat
     echo 'echo "net.ipv4.ip_forward = 1"  >> /etc/sysctl.conf' >> $target/usr/local/sbin/make.nat
     chmod a+x $target/usr/local/sbin/make.nat 
-    echo 'sudo make.nat' >> $target/home/${username}/500-masq.me 
-    chmod a+x $target/home/${username}/500-masq.me
+    echo 'sudo make.nat' >> $target/home/${username}/faiserv/500-masq.me 
+    chmod a+x $target/home/${username}/faiserv/500-masq.me
 
     # echo 'sudo reboot' > $target/home/${username}/150-reboot 
-    echo 'sudo poweroff' > $target/home/${username}/990-poweroff
-    chmod a+x $target/home/${username}/990-poweroff
+    echo 'sudo poweroff' > $target/home/${username}/faiserv/990-poweroff
+    chmod a+x $target/home/${username}/faiserv/990-poweroff
     echo 'sudo reboot' > $target/home/${username}/reboot
     chmod a+x $target/home/${username}/reboot
     echo 'sudo poweroff' > $target/home/${username}/poweroff
     chmod a+x $target/home/${username}/poweroff
 
-    echo 'sudo rm -rf /srv/fai/asc-fai-config ; cd /srv/fai && sudo git clone --branch server https://github.com/asc4asc/asc-fai-config.git' > $target/home/${username}/rm-git.clone.asc 
-    echo 'systemctl restart isc-dhcp-server.service' > $target/home/${username}/systemctl_restart_isc-dhcp-server.service
     echo 'ansible-playbook -c=local --inventory=localhost, debian-lan-ansible/minimal.yml' > $target/home/${username}/ansible.demo 
     chmod a+x $target/home/${username}/ansible.demo
     echo 'git clone https://salsa.debian.org/andi/debian-lan-ansible' > $target/home/${username}/get.ansible
