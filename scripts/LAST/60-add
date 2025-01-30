@@ -8,10 +8,10 @@ if ifclass DEBUG ; then
     mkdir $target/home/${username}/faiserv
     # echo '  ' > $target/home/${username}/
     echo '. 200-rc.local.fai && . 500-masq.me && . 600-get-config-space'> $target/home/${username}/faiserv/do-all
-    chmod a+x $target/home/${username}/do-all
+    chmod a+x $target/home/${username}/faiserv/do-all
 
     echo 'sudo chmod a+x /usr/local/sbin/rc.local && sudo /usr/local/sbin/rc.local' > $target/home/${username}/faiserv/200-rc.local.fai
-    chmod a+x $target/home/${username}/200-rc.local.fai
+    chmod a+x $target/home/${username}/faiserv/200-rc.local.fai
 
     echo 'echo "sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE" >> $target/etc/rc.local' > $target/usr/local/sbin/make.nat
     echo 'echo "net.ipv4.ip_forward = 1"  >> /etc/sysctl.conf' >> $target/usr/local/sbin/make.nat
