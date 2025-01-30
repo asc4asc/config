@@ -1,5 +1,10 @@
 PACKAGES install-norec
 network-manager
 git
+# :-)
 ansible
+# To build live cd in faiserver
 live-build
+# for fai-cd 
+mtools
+dosfstools
