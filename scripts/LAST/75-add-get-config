@@ -5,14 +5,14 @@
 error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
 if ifclass DEBUG ; then
 
-cat <<'EOF' > $target/home/${username}/600-get-config-space
+cat <<'EOF' > $target/home/${username}/faiserv/600-get-config-space
 cd /srv/fai && sudo mv config config.$$ && sudo git clone --branch main https://github.com/asc4asc/config.git
 sudo chmod -R a+x /srv/fai/config/scripts/*
 sudo chmod -R a+x /srv/fai/config/class/*
 sudo chmod -R a+x /srv/fai/config/hooks/*
 EOF
 
-chmod a+x $target/home/${username}/600-get-config-space
+chmod a+x $target/home/${username}/faiserv/600-get-config-space
 
 fi 
 
