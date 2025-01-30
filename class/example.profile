@@ -14,6 +14,15 @@ Long: This is the demohost example of FAI.
 Additional account called demo with password: fai, root password: fai
 Classes: INSTALL FAIBASE DEBIAN DEMO
 
+Name: GnomeDebug
+Description: Gnome desktop installation
+Short: A Gnome desktop, no LVM, You will get an account called demo
+Long: This is the Gnome desktop example. Additional account called
+demo with password: fai, root password: fai
+You should have a fast network connection, because most packages are
+downloaded from the internet.
+Classes: INSTALL FAIBASE DEBIAN DEMO XORG CLOUD GNOME DEBUG
+
 Name: Gnome
 Description: Gnome desktop installation
 Short: A Gnome desktop, no LVM, You will get an account called demo
@@ -22,30 +31,6 @@ demo with password: fai, root password: fai
 You should have a fast network connection, because most packages are
 downloaded from the internet.
 Classes: INSTALL FAIBASE DEBIAN DEMO XORG GNOME
-
-Name: Faiserver1
-Description: My FAI Server
-Short: just a very simple example, no xorg, an account called demo
-Long: This is the faiserver example of FAI.
-We need two ethernet interfaces one for internet und the other for fai netboot
-Additional account called demo with password: fai, root password: fai
-Classes: INSTALL FAIBASE DEBIAN DEMO CLOUD DEBUG FAISERVER1
-
-Name: Faiserver2
-Description: My FAI Server
-Short: just a very simple example, no xorg, an account called demo
-Long: This is the faiserver example of FAI.
-We need two ethernet interfaces one for internet und the other for fai netboot
-Additional account called demo with password: fai, root password: fai
-Classes: INSTALL FAIBASE DEBIAN DEMO CLOUD DEBUG FAISERVER2
-
-Name: Faiserver
-Description: My FAI Server
-Short: just a very simple example, no xorg, an account called demo
-Long: This is the faiserver example of FAI.
-We need two ethernet interfaces one for internet und the other for fai netboot
-Additional account called demo with password: fai, root password: fai
-Classes: INSTALL FAIBASE DEBIAN DEMO CLOUD DEBUG FAISERVER
 
 Name: Inventory
 Description: Show hardware info
