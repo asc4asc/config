@@ -32,8 +32,6 @@ cat /srv/fai/nfsroot/etc/hosts ' > $target/home/${username}/do-all
     chmod a+x $target/home/${username}/ansible.demo
     echo 'git clone https://salsa.debian.org/andi/debian-lan-ansible' > $target/home/${username}/get.ansible
     chmod a+x $target/home/${username}/get.ansible
-    echo 'git clone https://github.com/asc4asc/misc.git' > $target/home/${username}/get.misc4asc
-    chmod a+x $target/home/${username}/get.misc4asc
     echo 'git clone https://github.com/asc4asc/train-ansi' > $target/home/${username}/get.train-ansi
     chmod a+x $target/home/${username}/get.train-ansi
     echo 'sudo dd if=/dev/zero of=/dev/sda count=1000 && sudo sync && sudo reboot' > $target/home/${username}/clean.sda
