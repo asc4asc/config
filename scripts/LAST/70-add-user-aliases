@@ -12,4 +12,5 @@ cat <<'EOF' > $target/home/${username}/menu.txt
 This is a help test for the Menu in this Path.
 EOF
 
+echo 'menu' >> $target/home/${username}/.baschrc
 exit $error
