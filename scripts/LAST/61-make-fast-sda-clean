@@ -1,0 +1,11 @@
+#! /bin/bash
+
+# copyright Andreas Schockenhoff 2001-2025, asc@ekf.de
+
+error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
+
+if ifclass DEBUG ; then
+    echo 'sudo dd if=/dev/zero of=/dev/sda count=1000 && sudo sync && sudo reboot' > $target/home/${username}/clean.sda
+    chmod a+x $target/home/${username}/clean.sda
+fi
+exit $error

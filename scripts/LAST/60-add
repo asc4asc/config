@@ -5,7 +5,7 @@
 error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
 
 if ifclass DEBUG ; then
-    mkdir $target/home/${username}/faiserv
+    mkdir -p $target/home/${username}/faiserv
     # echo '  ' > $target/home/${username}/
     echo '. 200-rc.local.fai && . 500-masq.me && . 600-get-config-space'> $target/home/${username}/faiserv/do-all
     chmod a+x $target/home/${username}/faiserv/do-all
@@ -26,11 +26,6 @@ if ifclass DEBUG ; then
     chmod a+x $target/home/${username}/reboot
     echo 'sudo poweroff' > $target/home/${username}/poweroff
     chmod a+x $target/home/${username}/poweroff
-
-    echo 'git clone https://github.com/asc4asc/train-ansi' > $target/home/${username}/get.train-ansi
-    chmod a+x $target/home/${username}/get.train-ansi
-    echo 'sudo dd if=/dev/zero of=/dev/sda count=1000 && sudo sync && sudo reboot' > $target/home/${username}/clean.sda
-    chmod a+x $target/home/${username}/clean.sda
     
     mkdir -p ${target}/home/${username}/.ssh
 fi
