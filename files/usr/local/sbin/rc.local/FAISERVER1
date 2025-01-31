@@ -76,7 +76,7 @@ else
     echo ""
     cp -p $0 /var/tmp
     sleep 10
-    rm -f $0
+    # rm -f $0
     exit 99
 fi
 
