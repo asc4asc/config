@@ -19,14 +19,6 @@ if ifclass DEBUG ; then
     echo 'sudo make.nat' >> $target/home/${username}/faiserv/500-masq.me 
     chmod a+x $target/home/${username}/faiserv/500-masq.me
 
-    # echo 'sudo reboot' > $target/home/${username}/150-reboot 
-    echo 'sudo poweroff' > $target/home/${username}/faiserv/990-poweroff
-    chmod a+x $target/home/${username}/faiserv/990-poweroff
-    echo 'sudo reboot' > $target/home/${username}/reboot
-    chmod a+x $target/home/${username}/reboot
-    echo 'sudo poweroff' > $target/home/${username}/poweroff
-    chmod a+x $target/home/${username}/poweroff
-    
     mkdir -p ${target}/home/${username}/.ssh
 fi
 exit $error
