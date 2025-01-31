@@ -7,7 +7,7 @@ error=0; trap 'error=$(($?>$error?$?:$error))' ERR # save maximum error code
 if ifclass DEBUG ; then
     mkdir -p $target/home/${username}/faiserv
     # echo '  ' > $target/home/${username}/
-    echo '. 100-make.eth && . 200-rc.local.fai && . 500-masq.me && . 600-get-config-space'> $target/home/${username}/faiserv/do-all
+    echo '. 100-make.eth1 && . 200-rc.local.fai && . 500-masq.me && . 600-get-config-space'> $target/home/${username}/faiserv/do-all
     chmod a+x $target/home/${username}/faiserv/do-all
 
     echo 'sudo chmod a+x /usr/local/sbin/rc.local && sudo /usr/local/sbin/rc.local' > $target/home/${username}/faiserv/200-rc.local.fai
