@@ -14,6 +14,9 @@ fi
 if [ -f $target/etc/hosts.orig ]; then
     mv $target/etc/hosts.orig $target/etc/hosts
 fi
+
+ainsl -s /etc/hosts "$IPADDR $HOSTNAME.$DOMAIN $HOSTNAME"
+
 if [ -n "$IPADDR" ]; then
     ifclass DHCPC || ainsl -s /etc/hosts "$IPADDR $HOSTNAME.$DOMAIN $HOSTNAME"
 else
