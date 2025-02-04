@@ -17,8 +17,6 @@ if ifclass DEBUG ; then
     echo 'echo "net.ipv4.ip_forward = 1"  >> /etc/sysctl.conf' >> $target/usr/local/sbin/make.nat
     chmod a+x $target/usr/local/sbin/make.nat 
     echo 'sudo make.nat' >> $target/home/${username}/faiserv/500-masq.me 
-    chmod a+x $target/home/${username}/faiserv/500-masq.me
-
-    mkdir -p ${target}/home/${username}/.ssh
+    chmod a+x $target/home/${username}/faiserv/500-masq.me  
 fi
 exit $error
